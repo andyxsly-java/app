@@ -1,0 +1,35 @@
+databaseChangeLog: myDB
+  - changeSet:
+      id: 001-create-notification-task-table
+      author: andyxsly
+
+      changes:
+        - createTable:
+            tableName: notification_task
+
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: chatId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: message
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: dateTime
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
