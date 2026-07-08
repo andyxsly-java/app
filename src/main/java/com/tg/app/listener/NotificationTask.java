@@ -1,7 +1,6 @@
 package com.tg.app.listener;
 
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
 
 import java.time.LocalDateTime;
 
@@ -10,72 +9,54 @@ import java.time.LocalDateTime;
 
 public class NotificationTask {
 
-    private Long chat_id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String key;
-    private String text;
-    private float date;
-    private float time;
+    private Long id;
+    private Long chatId;
+    private String message;
+    private LocalDateTime dateTime;
 
     public NotificationTask() {
 
     }
 
-    public NotificationTask(Long chat_id, long id, String text, float date, float time) {
-        this.chat_id = chat_id;
+    public NotificationTask(Long id, Long chatId, String message, LocalDateTime dateTime) {
         this.id = id;
-        this.text = text;
-        this.date = date;
-        this.time = time;
+        this.chatId = chatId;
+        this.message = message;
+        this.dateTime = dateTime;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getChatId() {
-        return chat_id;
+    public Long getChatId() {
+        return chatId;
     }
 
-    public void setChatId(long chat_id) {
-        this.chat_id = chat_id;
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public float getDate() {
-        return date;
+    public LocalDateTime getNotificationTime() {
+        return dateTime;
     }
 
-    public void setDate(float date) {
-        this.date = date;
+    public void setNotificationTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
-
-    public float getTime() {
-        return time;
-    }
-
-    public void setTime(float time) {
-        this.time = time;
-    }
-
-    public void setChatId(Long chat_id) {
-    }
-
-    public void setNotificationTime(LocalDateTime notificationTime) {
-    }
-
 }

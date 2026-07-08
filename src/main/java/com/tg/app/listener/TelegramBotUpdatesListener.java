@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.regex.Pattern.matches;
-
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
@@ -40,9 +38,6 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         this.notificationTaskRepository = notificationTaskRepository;
     }
 
-
-
-
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener((UpdatesListener) this);
@@ -57,27 +52,27 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 continue;
             }
 
-            String text = update.message().text();
+            String message = update.message().text();
             Long chatId = update.message().chat().id();
 
-            if ("/start".equals(text)) {
+            if ("/start".equals(message)) {
                 telegramBot.execute(new SendMessage(chatId, "Здравствуй!"));
                 continue;
             }
 
-            Matcher matcher = PATTERN.matcher(text);
+            Matcher matcher = PATTERN.matcher(message);
 
             if (matcher.matches()) {
 
-                LocalDateTime notificationTime =
+                LocalDateTime dateTime =
                         LocalDateTime.parse(
                                 matcher.group(1),
                                 DATE_TIME_FORMATTER);
 
                 NotificationTask task = new NotificationTask();
                 task.setChatId(update.message().chat().id());
-                task.setNotificationTime(notificationTime);
-                task.setText(matcher.group(3));
+                task.setNotificationTime(dateTime);
+                task.setMessage(matcher.group(3));
 
                 notificationTaskRepository.save(task);
 
@@ -85,13 +80,5 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             }
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    public Logger getLogger() {
-        return logger;
-    }
-
-    public void setLogger(Logger logger) {
-        this.logger = logger;
     }
 }
