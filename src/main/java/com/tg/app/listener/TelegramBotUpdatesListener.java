@@ -29,6 +29,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
+
     @Autowired
     private final TelegramBot telegramBot;
     private final NotificationTaskRepository notificationTaskRepository;

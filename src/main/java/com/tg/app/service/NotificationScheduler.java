@@ -38,7 +38,6 @@ public class NotificationScheduler {
             telegramBot.execute(
                     new SendMessage(task.getChatId(), task.getMessage())
             );
-
             log.info("Найдено {} уведомлений для отправки: {}", tasks.size(), tasks);
         }
     }
